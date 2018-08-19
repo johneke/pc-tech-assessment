@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jeke.data.Event;
 
+
 /**
  * Cheap data layer abstraction
  * 
@@ -55,7 +56,7 @@ public class EventDataService {
 		}
 	}
 
-	public List<Event> summaries(long page, long limit, Date start, Date end) {
+	public EventDataServicePagedResult summaries(int page, int limit, Date start, Date end) {
 		List<Event> targets = this.eventsOrdered.stream()
 				.filter(event -> event.getDate().compareTo(start) > 0 && event.getDate().compareTo(end) < 0)
 				.collect(Collectors.toList());
@@ -72,11 +73,15 @@ public class EventDataService {
 			}
 		}
 		
-		return results;
+		return new EventDataServicePagedResult(page, targets.size(), results);
 	}
 
 	public Event detail(String id) {
 		return this.eventsById.get(id);
+	}
+	
+	public int count() {
+		return this.eventsOrdered.size();
 	}
 
 	private boolean loadEvents(String source) {
