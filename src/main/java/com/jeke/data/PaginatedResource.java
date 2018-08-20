@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PaginatedResource<T> {
 	private long page;
+	private long limit;
 	@JsonProperty("total_pages") private long totalPages;
 	private List<T> items;
 	
@@ -15,6 +16,14 @@ public class PaginatedResource<T> {
 	
 	public void setPage(long page) {
 		this.page = page;
+	}
+	
+	public long getLimit() {
+		return limit;
+	}
+	
+	public void setLimit(long limit) {
+		this.limit = limit;
 	}
 	
 	public long getTotalPages() {

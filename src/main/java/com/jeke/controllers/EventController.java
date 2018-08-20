@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.jeke.config.Configuration;
 import com.jeke.data.Event;
 import com.jeke.data.HttpError;
 import com.jeke.data.PaginatedResource;
@@ -28,10 +29,10 @@ public class EventController {
 	@Autowired
 	private EventDataService dataService;
 	
-	@RequestMapping(value = "/events", method=RequestMethod.GET)
+	@RequestMapping(value = Configuration.PREFIX + Configuration.VERSION + "/events", method=RequestMethod.GET)
 	public PaginatedResource<Event> events(
 		@RequestParam(value="page", defaultValue="0") String pageStr,
-		@RequestParam(value="limit", defaultValue="20") String limitStr,
+		@RequestParam(value="limit", defaultValue="25") String limitStr,
 		@RequestParam(value="startdate", defaultValue="0") String startDateStr,
 		@RequestParam(value="enddate", defaultValue="") String endDateStr) {
 		
@@ -49,13 +50,14 @@ public class EventController {
 		
 		PaginatedResource<Event> paginatedEvents = new PaginatedResource<>();
 		paginatedEvents.setPage(result.getPage());
+		paginatedEvents.setLimit(limit);
 		paginatedEvents.setItems(result.getEvents());
 		paginatedEvents.setTotalPages(result.getTotal() % limit == 0 ? numPages : numPages + 1);
 		
 		return paginatedEvents;
 	}
 
-	@RequestMapping(value = "/events/{id}", method=RequestMethod.GET)
+	@RequestMapping(value = Configuration.PREFIX + Configuration.VERSION + "/events/{id}", method=RequestMethod.GET)
 	public Event eventDetails(@PathVariable("id") String id) {
 		return dataService.detail(id);
 	}
