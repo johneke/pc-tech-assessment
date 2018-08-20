@@ -19,6 +19,7 @@ import com.jeke.data.Event;
 import com.jeke.data.HttpError;
 import com.jeke.data.PaginatedResource;
 import com.jeke.errors.InvalidInputException;
+import com.jeke.errors.UnknownEventException;
 import com.jeke.helpers.EventDataService;
 import com.jeke.helpers.EventDataServicePagedResult;
 
@@ -59,12 +60,22 @@ public class EventController {
 
 	@RequestMapping(value = Configuration.PREFIX + Configuration.VERSION + "/events/{id}", method=RequestMethod.GET)
 	public Event eventDetails(@PathVariable("id") String id) {
-		return dataService.detail(id);
+		Event event = dataService.detail(id);
+		if (event != null) {
+			return event;
+		}
+		
+		throw new UnknownEventException(id);
 	}
 	
 	@ExceptionHandler(InvalidInputException.class)
 	public ResponseEntity<HttpError> handleInvalidInputException(InvalidInputException e) {
 		return new ResponseEntity<HttpError>(new HttpError(400, e.getMessage()), HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(UnknownEventException.class)
+	public ResponseEntity<HttpError> handleUnknownEventException(UnknownEventException e) {
+		return new ResponseEntity<HttpError>(new HttpError(404, e.getMessage()), HttpStatus.NOT_FOUND);
 	}
 	
 	private int parsePositiveInteger(String variable, String variableName) {
