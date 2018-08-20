@@ -25,7 +25,7 @@ java -Dsource="https://s3.amazonaws.com/je-randomfiles/assignment_data_short.jso
 ```
 
 
-You should now have the back end running without the front end. To deploy the front end into the back end, run (node, must build front end first. See here on how to clone and build front end code: https://github.com/johneke/pc-tech-assessment-server):
+You should now have the back end running without the front end. To deploy the front end into the back end, run (node, must build front end first. See here on how to clone and build front end code: https://github.com/johneke/pc-tech-assessment-client):
 
 ```
 cp -R /path/to/frontend/repo/dist/events-viewer/* /path/to/backend/repo/src/main/resources/static/
