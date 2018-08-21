@@ -25,9 +25,3 @@ java -Dsource="https://s3.amazonaws.com/je-randomfiles/assignment_data_short.jso
 ```
 
 You should now have the API server running.
-
-# Couple of Notes
-
-* I made a cheap (and fairly inefficient) data abstraction layer on the backend. I did not want to bother with a database, but the result is that the `EventDataService` might look a bit messy/hacky/inefficient.
-* I did not add any tests. Would have been nice to have some, but decided to focus the limited time on functionality.
-* Cold start time could be faster if I fetched a zipped version from S3 and unzipped in memory, however I decided not to get too fancy with this.
