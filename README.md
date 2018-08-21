@@ -1,6 +1,7 @@
 # Tools Required
 
 * Git
+* Java 8* JDK
 * Maven
 
 # Steps To Run
