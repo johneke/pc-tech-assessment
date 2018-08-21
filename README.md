@@ -16,13 +16,13 @@
 First make sure you are in the directory where you cloned this repo. Then...
 
 ```
-java -Dsource="https://s3.amazonaws.com/je-randomfiles/assignment_data_full.json" -jar target/EventServer-0.0.1-SNAPSHOT.jar
+java -Dsource="https://s3.amazonaws.com/je-randomfiles/assignment_data_short.json" -jar target/EventServer-0.0.1-SNAPSHOT.jar
 ```
 
 Or..
 
 ```
-java -Dsource="https://s3.amazonaws.com/je-randomfiles/assignment_data_short.json" -jar target/EventServer-0.0.1-SNAPSHOT.jar
+java -Dsource="https://s3.amazonaws.com/je-randomfiles/assignment_data_full.json" -jar target/EventServer-0.0.1-SNAPSHOT.jar
 ```
 
 You should now have the API server running.
